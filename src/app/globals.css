@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-brand-accent: #2dd4bf;
+  --color-brand-purple: #a855f7;
+  --color-brand-dark: #050505;
+  --color-brand-gray: #1a1a1a;
+  
+  --font-syne: "Syne", sans-serif;
+  --font-serif: "DM Serif Display", serif;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+  
+  --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --accent: #2dd4bf;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-syne);
+}
+
+/* Modern Utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-premium);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, #2dd4bf 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mesh-gradient {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(45, 212, 191, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(45, 212, 191, 0.1) 0, transparent 50%);
+}
+
+.glow-mesh {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Keep previous neomorphism as legacy if needed, but redefine for dark theme */
+.neu-pressed {
+  background: #0a0a0a;
+  box-shadow: inset 5px 5px 10px #030303, 
+              inset -5px -5px 10px #111111;
+}
+
+.neu-raised {
+  background: #0a0a0a;
+  box-shadow: 10px 10px 20px #030303, 
+              -10px -10px 20px #111111;
+}
+
