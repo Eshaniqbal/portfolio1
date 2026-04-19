@@ -21,7 +21,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
       
-      // Update active section based on scroll position
       const sections = navLinks.map(link => link.href.replace("#", "")).filter(Boolean);
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -41,46 +40,40 @@ export default function Navbar() {
     <>
       {/* Desktop & Mobile Top Bar */}
       <nav
-        className={`fixed top-4 sm:top-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] sm:w-[90%] max-w-5xl`}
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-300`}
       >
-        <div className={`px-4 sm:px-6 py-3 sm:py-4 rounded-2xl sm:rounded-full flex justify-between items-center transition-all duration-500 border ${
-          scrolled 
-            ? "bg-brand-dark/80 backdrop-blur-2xl border-white/10 py-2 sm:py-3 scale-95 shadow-[0_0_30px_rgba(0,0,0,0.5)]" 
-            : "glass-card border-white/5 py-4 sm:py-5"
+        <div className={`px-4 py-3 border-[3px] border-black bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center ${
+          scrolled ? "py-2" : "py-3"
         }`}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
           >
-            <Link href="/" className="group flex items-center gap-2 sm:gap-3">
-              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold transition-all duration-700 ${
-                scrolled ? "bg-white text-brand-dark" : "bg-brand-accent text-brand-dark group-hover:rotate-[360deg]"
-              }`}>
+            <Link href="/" className="group flex items-center gap-3">
+              <div className="w-8 h-8 bg-nb-lime border-[3px] border-black flex items-center justify-center font-black text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
                 E
               </div>
-              <span className={`font-syne font-bold text-base sm:text-lg tracking-tighter transition-colors ${
-                scrolled ? "text-white" : "text-white/90"
-              }`}>ESHAN IQBAL</span>
+              <span className="font-syne font-black text-lg tracking-tighter uppercase italic">ESHAN IQBAL</span>
             </Link>
           </motion.div>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-5">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all relative group ${
-                  activeSection === link.name 
-                    ? "text-brand-accent" 
-                    : scrolled ? "text-white/70 hover:text-white" : "text-white/50 hover:text-brand-accent"
+                className={`text-[10px] font-black uppercase tracking-widest transition-all relative group ${
+                  activeSection === link.name ? "text-nb-purple" : "text-black hover:text-nb-pink"
                 }`}
               >
                 {link.name}
-                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all ${
-                  activeSection === link.name ? "w-4 bg-brand-accent" : "w-0 group-hover:w-4 " + (scrolled ? "bg-white" : "bg-brand-accent")
-                }`} />
+                {activeSection === link.name && (
+                  <motion.div 
+                    layoutId="navUnderline"
+                    className="absolute -bottom-1 left-0 w-full h-1 bg-black"
+                  />
+                )}
               </Link>
             ))}
           </div>
@@ -88,18 +81,12 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center"
           >
             <a 
               href="https://wa.me/919419403158"
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold transition-all duration-300 flex items-center gap-2 ${
-                scrolled 
-                  ? "bg-brand-accent text-brand-dark hover:bg-white" 
-                  : "bg-white text-brand-dark hover:bg-brand-accent"
-              }`}
+              className="nb-button bg-nb-yellow text-xs px-4 py-2"
             >
               <span className="hidden sm:inline">Let's Talk</span>
               <MessageCircle size={16} />
@@ -109,56 +96,48 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Bottom Navigation */}
-      <motion.div 
-        initial={{ y: 100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}
-        transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.5 }}
-        className="fixed bottom-8 left-1/2 z-50 md:hidden w-[auto] min-w-[280px]"
-      >
-        <div className="glass-card border-white/10 rounded-[2rem] p-1.5 flex justify-center items-center gap-1 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="fixed bottom-6 inset-x-0 z-50 md:hidden flex justify-center px-4">
+        <motion.div 
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          className="bg-white border-[3px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-2 flex justify-around items-center relative w-full max-w-[340px]"
+        >
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive = activeSection === link.name;
             return (
-              <motion.div
+              <Link
                 key={link.name}
-                whileTap={{ scale: 0.9 }}
-                className="relative"
+                href={link.href}
+                onClick={() => setActiveSection(link.name)}
+                className="relative p-4 z-10"
               >
-                <Link
-                  href={link.href}
-                  onClick={() => setActiveSection(link.name)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-500 relative ${
-                    isActive ? "text-brand-accent" : "text-white/40"
-                  }`}
+                {isActive && (
+                  <motion.div
+                    layoutId="mobileNavActive"
+                    className="absolute inset-0 bg-nb-lime border-[2px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <motion.div
+                  animate={{ 
+                    scale: isActive ? 1.2 : 1,
+                    rotate: isActive ? [0, -10, 10, 0] : 0
+                  }}
+                  className="relative z-20"
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabMobile"
-                      className="absolute inset-0 bg-brand-accent/10 rounded-2xl border border-brand-accent/20"
-                      transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
-                    />
-                  )}
-                  <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
-                  <AnimatePresence mode="wait">
-                    {isActive && (
-                      <motion.span
-                        initial={{ width: 0, opacity: 0, x: -5 }}
-                        animate={{ width: "auto", opacity: 1, x: 0 }}
-                        exit={{ width: 0, opacity: 0, x: -5 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="text-[10px] font-bold uppercase tracking-wider overflow-hidden whitespace-nowrap"
-                      >
-                        {link.name}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </Link>
-              </motion.div>
+                  <Icon 
+                    size={22} 
+                    strokeWidth={isActive ? 3 : 2}
+                    className={isActive ? "text-black" : "text-black/40"} 
+                  />
+                </motion.div>
+              </Link>
             );
           })}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </>
   );
 }
+
