@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Briefcase, Sparkles, User, Layers, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "#", icon: Home },
@@ -50,8 +51,14 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
           >
             <Link href="/" className="group flex items-center gap-3">
-              <div className="w-8 h-8 bg-nb-lime border-[3px] border-black flex items-center justify-center font-black text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
-                E
+              <div className="relative w-10 h-10 border-[3px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all overflow-hidden bg-white p-1">
+                <Image 
+                  src="/logo.png" 
+                  alt="Eshan Iqbal Logo" 
+                  fill
+                  sizes="40px"
+                  className="object-contain p-1"
+                />
               </div>
               <span className="font-syne font-black text-lg tracking-tighter uppercase italic">ESHAN IQBAL</span>
             </Link>
