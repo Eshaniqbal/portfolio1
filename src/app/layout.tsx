@@ -16,7 +16,7 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eshaniqbal.com"),
+  metadataBase: new URL("https://eshaniqbal.co.in"),
   title: "ESHAN IQBAL | AI/ML Engineer & Full-Stack Developer",
   description: "Senior AI/ML Engineer and Full-Stack Developer specializing in high-performance digital systems, scalable AI solutions, and innovative software development. Based in Bangalore.",
   keywords: ["Eshan Iqbal", "AI Engineer", "ML Engineer", "Full-Stack Developer", "Next.js", "React", "AWS", "Machine Learning", "Software Developer", "Bangalore Developer"],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://eshaniqbal.com",
+    url: "https://eshaniqbal.co.in",
     title: "ESHAN IQBAL | AI/ML Engineer & Full-Stack Developer",
     description: "Building the future with AI and Scalable Digital Solutions.",
     siteName: "Eshan Iqbal Portfolio",
